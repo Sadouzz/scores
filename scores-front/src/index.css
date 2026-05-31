@@ -1,0 +1,34 @@
+:root {
+  --bg-color: #0b0c10;
+  --text-main: #c5c6c7;
+  --neon-cyan: #66fcf1;
+  --neon-blue: #45a29e;
+  --neon-magenta: #ff00ff;
+  --glass-bg: rgba(11, 12, 16, 0.7);
+  --glass-border: rgba(102, 252, 241, 0.3);
+  
+  --font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(102, 252, 241, 0.1), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(255, 0, 255, 0.1), transparent 25%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--neon-magenta), 0 0 40px var(--neon-magenta), 0 0 80px var(--neon-magenta);
+  margin-bottom: 2rem;
+}
