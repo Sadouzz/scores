@@ -63,7 +63,7 @@ pipeline {
         // --- LES ÉTAPES SUIVANTES SONT COMMENTÉES POUR L'INSTANT ---
         // Elles nécessitent de configurer des identifiants (Credentials) dans Jenkins
 
-        /*
+        
         stage('Push Docker Images') {
             steps {
                 script {
@@ -97,6 +97,6 @@ pipeline {
                 }
             }
         }
-        */
+        
     }
 }
