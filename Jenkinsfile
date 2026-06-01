@@ -1,9 +1,13 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'node26' 
+    }
+
     // Variables d'environnement pour réutiliser les noms d'images facilement
     environment {
-        DOCKER_HUB_USER = "ton_utilisateur_dockerhub"
+        DOCKER_HUB_USER = "sadouzz"
         BACKEND_IMAGE = "${DOCKER_HUB_USER}/scores-backend:latest"
         FRONTEND_IMAGE = "${DOCKER_HUB_USER}/scores-frontend:latest"
     }
