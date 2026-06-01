@@ -88,6 +88,8 @@ pipeline {
                 script {
                     withKubeConfig([credentialsId: 'kubeconfig-credentials']) {
                         if (isUnix()) {
+                            // Remplacer 127.0.0.1 ou localhost par host.docker.internal pour que le conteneur Jenkins accède au cluster de l'hôte
+                            sh "sed -i -e 's/127.0.0.1/host.docker.internal/g' -e 's/localhost/host.docker.internal/g' \$KUBECONFIG"
                             // Télécharger kubectl temporairement car il n'est pas installé sur le serveur Jenkins
                             sh 'curl -LO "https://dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl"'
                             sh 'chmod +x ./kubectl'
