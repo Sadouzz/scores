@@ -93,9 +93,9 @@ pipeline {
                             // Télécharger kubectl temporairement car il n'est pas installé sur le serveur Jenkins
                             sh 'curl -LO "https://dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl"'
                             sh 'chmod +x ./kubectl'
-                            sh './kubectl apply -f k8s/'
+                            sh './kubectl apply -f k8s/ --insecure-skip-tls-verify=true'
                         } else {
-                            bat 'kubectl apply -f k8s/'
+                            bat 'kubectl apply -f k8s/ --insecure-skip-tls-verify=true'
                         }
                     }
                 }
