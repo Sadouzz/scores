@@ -88,7 +88,10 @@ pipeline {
                 script {
                     withKubeConfig([credentialsId: 'kubeconfig-credentials']) {
                         if (isUnix()) {
-                            sh 'kubectl apply -f k8s/'
+                            // Télécharger kubectl temporairement car il n'est pas installé sur le serveur Jenkins
+                            sh 'curl -LO "https://dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl"'
+                            sh 'chmod +x ./kubectl'
+                            sh './kubectl apply -f k8s/'
                         } else {
                             bat 'kubectl apply -f k8s/'
                         }
