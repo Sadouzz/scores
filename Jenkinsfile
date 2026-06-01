@@ -7,9 +7,10 @@ pipeline {
 
     // Variables d'environnement pour réutiliser les noms d'images facilement
     environment {
-        DOCKER_HUB_USER = credentials('docker-hub-credentials')
-        BACKEND_IMAGE = "${DOCKER_HUB_USER}/scores-backend:latest"
-        FRONTEND_IMAGE = "${DOCKER_HUB_USER}/scores-frontend:latest"
+        DOCKER_CREDS = credentials('docker-hub-credentials')
+        
+        BACKEND_IMAGE = "${DOCKER_CREDS_USR}/scores-backend:latest"
+        FRONTEND_IMAGE = "${DOCKER_CREDS_USR}/scores-frontend:latest"
     }
 
     stages {
@@ -70,11 +71,11 @@ pipeline {
                     // 'docker-hub-credentials' doit être ajouté dans les "Credentials" de Jenkins
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
                         if (isUnix()) {
-                            sh "echo \$DOCKER_PASS | docker login -u \$DOCKER_USER --password-stdin"
+                            sh "echo \$DOCKER_CREDS_PSW | docker login -u \$DOCKER_CREDS_USR --password-stdin"
                             sh "docker push ${BACKEND_IMAGE}"
                             sh "docker push ${FRONTEND_IMAGE}"
                         } else {
-                            bat "echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin"
+                            bat "echo %DOCKER_CREDS_PSW% | docker login -u %DOCKER_CREDS_USR% --password-stdin"
                             bat "docker push ${BACKEND_IMAGE}"
                             bat "docker push ${FRONTEND_IMAGE}"
                         }
