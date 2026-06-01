@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scores-backend
+  labels:
+    app: scores-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scores-backend
+  template:
+    metadata:
+      labels:
+        app: scores-backend
+    spec:
+      containers:
+      - name: scores-backend
+        image: sadouzz/scores-backend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scores-backend-service
+spec:
+  selector:
+    app: scores-backend
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP

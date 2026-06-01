@@ -80,20 +80,18 @@ pipeline {
                         }
                     }
                 }
-            }
-        }
-
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh 'kubectl apply -f k8s/'
-                    } else {
-                        bat 'kubectl apply -f k8s/'
+                    withKubeConfig([credentialsId: 'kubeconfig-credentials']) {
+                        if (isUnix()) {
+                            sh 'kubectl apply -f k8s/'
+                        } else {
+                            bat 'kubectl apply -f k8s/'
+                        }
                     }
                 }
             }
-        }
-        
+        }        
     }
 }
