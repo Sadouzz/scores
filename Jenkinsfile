@@ -86,13 +86,10 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    // 'kubeconfig-credentials' doit contenir ton fichier de configuration Kubernetes
-                    withKubeConfig([credentialsId: 'kubeconfig-credentials']) {
-                        if (isUnix()) {
-                            sh 'kubectl apply -f k8s/'
-                        } else {
-                            bat 'kubectl apply -f k8s/'
-                        }
+                    if (isUnix()) {
+                        sh 'kubectl apply -f k8s/'
+                    } else {
+                        bat 'kubectl apply -f k8s/'
                     }
                 }
             }
